@@ -1,5 +1,6 @@
 import React from 'react';
-import FinishedList from '@components/FinishedList';
+import FinishedList from '@components/Quiz/FinishedList';
+import Button from '@components/UI/Button';
 import styles from './FinishedQuiz.module.scss';
 
 const FinishedQuiz = props => (
@@ -13,8 +14,10 @@ const FinishedQuiz = props => (
 
       <p>Правильно { props.resultState.total } из { props.quiz.length }</p>
 
-      <button className={ styles.btn }
-              onClick={ props.onRetry } >Повторить</button>
+      <div className={ styles.buttons }>
+        <Button onClick={ props.onRetry }>Повторить</Button>
+        <Button disabled >Перейти в список тестов</Button>
+      </div>
     </div>
   </React.Fragment>
 );

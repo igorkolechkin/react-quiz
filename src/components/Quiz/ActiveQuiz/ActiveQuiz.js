@@ -1,5 +1,5 @@
 import React from 'react';
-import AnswerList from '@components/AnswerList';
+import AnswerList from '@components/Quiz/AnswerList';
 
 import styles from './ActiveQuiz.module.scss';
 

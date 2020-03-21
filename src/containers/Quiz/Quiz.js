@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import ActiveQuiz from '@components/ActiveQuiz';
-import FinishedQuiz from '@components/FinishedQuiz';
+import ActiveQuiz from '@components/Quiz/ActiveQuiz';
+import FinishedQuiz from '@components/Quiz/FinishedQuiz';
 
 class Quiz extends Component {
   state = {
@@ -104,13 +104,13 @@ class Quiz extends Component {
           });
 
           window.clearTimeout(timeout);
-        }, 0);
+        }, 1500);
       } else {
         const timeout = window.setTimeout(() => {
           this.setState({ isFinished: true });
 
           window.clearTimeout(timeout);
-        }, 0);
+        }, 1500);
       }
     } else {
       resultState.results[this.state.activeQuestion] = 'error';

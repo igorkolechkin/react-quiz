@@ -1,5 +1,5 @@
 import React from 'react';
-import FinishedItem from '@components/FinishedItem';
+import FinishedItem from '@components/Quiz/FinishedItem';
 
 const FinishedList = props => (
   <ul>
