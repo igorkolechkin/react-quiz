@@ -9,10 +9,12 @@ const ActiveQuiz = props => (
 
     <div className={ styles.quiz + ' card' }>
       <header>
-        <span className={ styles.quiz__title }>
+        <span className={ styles.title }>
           { `${props.questionNumber}. ${props.question}` }
         </span>
-        <span>{ props.questionNumber } из { props.quizLength }</span>
+        <span className={ styles.count }>
+          { props.questionNumber } из { props.quizLength }
+        </span>
       </header>
 
       <AnswerList answers={ props.answers }

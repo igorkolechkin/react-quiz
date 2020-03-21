@@ -13,25 +13,69 @@ class Quiz extends Component {
     },
     quiz: [
       {
-        question: 'Какого цвета небо?',
+        question: 'Какой тег существует?',
         rightAnswerId: 1,
         id: 0,
         answers: [
-          {text: 'Черный', id: 0},
-          {text: 'Синий', id: 1},
-          {text: 'Красный', id: 2},
-          {text: 'Зеленый', id: 3}
+          {text: '<color>', id: 0},
+          {text: '<code>', id: 1},
+          {text: '<pr>', id: 2},
+          {text: '<quote>', id: 3}
         ]
       },
       {
-        question: 'В каком году основали Санкт-Петербург?',
+        question: 'Как правильно задать ссылку на адрес электронной почты?',
         rightAnswerId: 2,
         id: 1,
         answers: [
-          {text: '1700', id: 0},
-          {text: '1702', id: 1},
-          {text: '1703', id: 2},
-          {text: '1803', id: 3}
+          {text: '<a href="mail:myrusakov@gmail.com">Написать</a>', id: 0},
+          {text: '<a href="myrusakov@gmail.com">Написать</a>', id: 1},
+          {text: '<a href="mailto:myrusakov@gmail.com">Написать</a>', id: 2},
+          {text: '<a href="email:myrusakov@gmail.com">Написать</a>', id: 3}
+        ]
+      },
+      {
+        question: 'Какой из тегов создает нумерованный список?',
+        rightAnswerId: 0,
+        id: 2,
+        answers: [
+          {text: '<ol>', id: 0},
+          {text: '<ul>', id: 1},
+          {text: '<tr>', id: 2},
+          {text: '<list>', id: 3}
+        ]
+      },
+      {
+        question: 'На сайте внутри папки pages находится файл page.html. А внутри папки images находится файл foto.jpg. Причём папки images и pages лежат в корне сайта. Как правильно написать путь к foto.jpg из файла page.html?',
+        rightAnswerId: 0,
+        id: 3,
+        answers: [
+          {text: '../images/foto.jpg', id: 0},
+          {text: 'images/foto.jpg', id: 1},
+          {text: 'pages/images/foto.jpg', id: 2},
+          {text: '../images/pages/foto.jpg', id: 3}
+        ]
+      },
+      {
+        question: 'Какая ошибка в следующем коде: <a href="page.html"><b><i>Страница 1</i></a>?',
+        rightAnswerId: 1,
+        id: 4,
+        answers: [
+          {text: 'Не указан обязательный атрибут title у тега <a>', id: 0},
+          {text: 'Не закрыт тег <b>', id: 1},
+          {text: 'Внутри тега <a> не может быть тег <b> и/или тег <i>', id: 2},
+          {text: 'Не указан обязательный атрибут alt у тега <a>', id: 3}
+        ]
+      },
+      {
+        question: 'Как написать химическую формулу тетрасульфида димышьяка (As2S4)?',
+        rightAnswerId: 0,
+        id: 5,
+        answers: [
+          {text: 'As<sub>2</sub>S<sub>4</sub>', id: 0},
+          {text: 'As<pow>2</pow>S<pow>4</pow>', id: 1},
+          {text: 'As<sup>2S<sup>4', id: 2},
+          {text: 'As<sup>2</sup>S<sup>4</sup>', id: 3}
         ]
       }
     ]
