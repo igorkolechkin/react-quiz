@@ -7,6 +7,7 @@ class Quiz extends Component {
     isFinished: false,
     activeQuestion: 0,
     answerState: null,
+    noClickableAnswer: false,
     resultState: {
       total: 0,
       results: {}
@@ -82,10 +83,16 @@ class Quiz extends Component {
   };
 
   onAnswerClickHandler = id => {
-    const newActiveQuestion = this.state.activeQuestion + 1;
+    if (this.state.noClickableAnswer) return;
+    this.setState({ noClickableAnswer: true });
+
     const resultState = this.state.resultState;
+    let activeQuestion = this.state.activeQuestion;
+    let isFinished = this.state.isFinished;
 
     if (this.state.quiz[this.state.activeQuestion].rightAnswerId === id) {
+      activeQuestion++;
+
       if (!resultState.results[this.state.activeQuestion]) {
         resultState.results[this.state.activeQuestion] = 'success';
         resultState.total = resultState.total + 1
@@ -96,31 +103,26 @@ class Quiz extends Component {
         resultState
       });
 
-      const timeout = window.setTimeout(() => {
-        if (newActiveQuestion <= this.state.quiz.length - 1) {
-          this.setState({
-            activeQuestion: newActiveQuestion,
-            answerState: null
-          });
-        } else {
-          this.setState({ isFinished: true });
-        }
+      if (activeQuestion >= this.state.quiz.length) isFinished = true;
 
-        window.clearTimeout(timeout);
-      }, 2000);
     } else {
       resultState.results[this.state.activeQuestion] = 'error';
       this.setState({
         answerState: {[id]: 'error'},
         resultState
       });
-
-      const timeout = window.setTimeout(() => {
-        this.setState({ answerState: null });
-
-        window.clearTimeout(timeout);
-      }, 2000);
     }
+
+    const timeout = window.setTimeout(() => {
+      this.setState({
+        answerState: null,
+        noClickableAnswer: false,
+        activeQuestion,
+        isFinished
+      });
+
+      window.clearTimeout(timeout);
+    }, 2000);
   };
 
   onRetryHandler = () => {
@@ -138,21 +140,21 @@ class Quiz extends Component {
   render() {
     return (
       <React.Fragment>
-      {
-        this.state.isFinished
-          ? <FinishedQuiz
-            resultState={ this.state.resultState }
-            quiz={ this.state.quiz }
-            onRetry={ this.onRetryHandler } />
+        {
+          this.state.isFinished
+            ? <FinishedQuiz
+              resultState={ this.state.resultState }
+              quiz={ this.state.quiz }
+              onRetry={ this.onRetryHandler } />
 
-          : <ActiveQuiz
-            question={ this.state.quiz[this.state.activeQuestion].question }
-            answers={ this.state.quiz[this.state.activeQuestion].answers }
-            questionNumber={ this.state.activeQuestion + 1 }
-            quizLength={ this.state.quiz.length }
-            onAnswerClick={ this.onAnswerClickHandler }
-            answerState={ this.state.answerState }/>
-      }
+            : <ActiveQuiz
+              question={ this.state.quiz[this.state.activeQuestion].question }
+              answers={ this.state.quiz[this.state.activeQuestion].answers }
+              questionNumber={ this.state.activeQuestion + 1 }
+              quizLength={ this.state.quiz.length }
+              onAnswerClick={ this.onAnswerClickHandler }
+              answerState={ this.state.answerState }/>
+        }
       </React.Fragment>
     )
   }
