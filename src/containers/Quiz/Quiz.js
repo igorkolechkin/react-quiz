@@ -96,29 +96,30 @@ class Quiz extends Component {
         resultState
       });
 
-      if (newActiveQuestion <= this.state.quiz.length - 1) {
-        const timeout = window.setTimeout(() => {
+      const timeout = window.setTimeout(() => {
+        if (newActiveQuestion <= this.state.quiz.length - 1) {
           this.setState({
             activeQuestion: newActiveQuestion,
             answerState: null
           });
-
-          window.clearTimeout(timeout);
-        }, 1500);
-      } else {
-        const timeout = window.setTimeout(() => {
+        } else {
           this.setState({ isFinished: true });
+        }
 
-          window.clearTimeout(timeout);
-        }, 1500);
-      }
+        window.clearTimeout(timeout);
+      }, 2000);
     } else {
       resultState.results[this.state.activeQuestion] = 'error';
-
       this.setState({
         answerState: {[id]: 'error'},
         resultState
       });
+
+      const timeout = window.setTimeout(() => {
+        this.setState({ answerState: null });
+
+        window.clearTimeout(timeout);
+      }, 2000);
     }
   };
 
