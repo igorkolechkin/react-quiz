@@ -1,0 +1,25 @@
+.item {
+  i {
+    margin-left: 10px;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.item.success {
+  i {
+    color: #a1f045;
+  }
+}
+
+.item.error {
+  span {
+    opacity: .7;
+  }
+
+  i {
+    color: #f0576c;
+  }
+}
