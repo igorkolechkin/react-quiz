@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 
 #root {
   background: linear-gradient(90deg, #5041b2 0%, #7969e6 10%);
@@ -32,15 +38,25 @@ code {
 }
 
 .card {
-  max-width: 500px;
   width: 100%;
   border: 2px solid #fff;
   border-radius: 5px;
   padding: 15px;
 }
 
+.container {
+  max-width: 530px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
 ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+h1,h2 {
+  margin-bottom: 20px;
 }

@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 const NavItem = props => (
   <li>
-    {console.log(props)}
     <NavLink
       exact={ props.exact }
       className="nav__link"

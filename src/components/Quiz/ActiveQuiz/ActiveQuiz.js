@@ -7,8 +7,8 @@ const ActiveQuiz = props => (
   <React.Fragment>
     <h2>Ответьте на все вопросы</h2>
 
-    <div className={ styles.quiz + ' card' }>
-      <header>
+    <div className={'card' }>
+      <header className={ styles.header }>
         <span className={ styles.title }>
           { `${props.questionNumber}. ${props.question}` }
         </span>
