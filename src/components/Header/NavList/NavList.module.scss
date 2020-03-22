@@ -1,0 +1,39 @@
+.nav {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  background: #fff;
+  transform: translateX(-300px);
+  transition: transform .3s;
+  padding-top: 50px;
+  text-align: center;
+
+  &.open {
+    transform: translateX(0);
+  }
+
+  li {
+    cursor: pointer;
+    transition: background-color .3s;
+  }
+
+  li:hover {
+    background-color: #333;
+
+    a {
+      color: #fff;
+    }
+  }
+
+  a {
+    font-size: 18px;
+    line-height: 1;
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 10px 0;
+    transition: color .3s;
+  }
+}

@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
-import Layout from './hoc/Layout';
-import Quiz from './containers/Quiz';
+import Quiz from '@containers/Quiz';
+import Header from '@containers/Header';
 
 class App extends Component {
   render() {
     return (
-      <Layout>
-        <Quiz />
-      </Layout>
+      <React.Fragment>
+        <Header />
+
+        <main className="layout">
+          <Quiz />
+        </main>
+      </React.Fragment>
     )
   }
 }

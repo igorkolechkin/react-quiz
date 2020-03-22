@@ -2,7 +2,7 @@
   header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 20px;
   }
 }
@@ -14,5 +14,5 @@
 
 .count {
   white-space: nowrap;
-  padding-left: 30px;
+  margin: 5px 0 0 30px;
 }
