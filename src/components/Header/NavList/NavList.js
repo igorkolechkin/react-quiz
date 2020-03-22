@@ -1,24 +1,26 @@
 import React from 'react';
 import NavItem from '@components/Header/NavItem';
 
-import styles from './NavList.module.scss';
+import './NavList.scss';
 
 const NavList = props => {
   const classes = [
-    styles.nav,
-    props.isOpen ? styles.open : null
+    'nav',
+    props.isOpen ? 'open' : null
   ];
 
   return (
-    <ul className={ classes.join(' ') }>
-      { props.nav.map((item, index) => {
-        return (
-          <NavItem
-            key={ index }
-            link={ item.link }
-            name={ item.name } />
-        )
-      })
+    <ul className={classes.join(' ')}>
+      {
+        props.nav.map((item, index) => {
+          return (
+            <NavItem
+              key={index}
+              exact={item.exact}
+              to={item.to}
+              name={item.name}/>
+          )
+        })
       }
     </ul>
   )

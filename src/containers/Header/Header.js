@@ -6,9 +6,9 @@ class Header extends Component {
   state = {
     menuOpen: false,
     nav: [
-      {link: 'home', name: 'home'},
-      {link: 'tests', name: 'tests'},
-      {link: 'about', name: 'about'}
+      {to: '/', name: 'Список', exact: true},
+      {to: '/auth', name: 'Авторизация', exact: false},
+      {to: '/quiz-creator', name: 'Создать тест', exact: false}
     ]
   };
 
