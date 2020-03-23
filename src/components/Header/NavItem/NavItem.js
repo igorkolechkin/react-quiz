@@ -6,7 +6,8 @@ const NavItem = props => (
     <NavLink
       exact={ props.exact }
       className="nav__link"
-      to={ props.to }>{ props.name }</NavLink>
+      to={ props.to }
+      onClick={ props.onToggleMenu }>{ props.name }</NavLink>
   </li>
 );
 

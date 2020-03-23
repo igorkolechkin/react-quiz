@@ -18,7 +18,8 @@ const NavList = props => {
               key={index}
               exact={item.exact}
               to={item.to}
-              name={item.name}/>
+              name={item.name}
+              onToggleMenu={ props.onToggleMenu } />
           )
         })
       }

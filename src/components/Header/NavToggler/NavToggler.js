@@ -10,7 +10,7 @@ const NavToggler = props => {
 
   return (
     <i className={ classes.join(' ') }
-       onClick={ props.onClick } />
+       onClick={ props.onToggleMenu } />
   )
 };
 

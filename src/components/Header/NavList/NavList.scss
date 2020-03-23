@@ -9,6 +9,7 @@
   transition: transform .3s;
   padding-top: 50px;
   text-align: center;
+  z-index: 2;
 
   &.open {
     transform: translateX(0);

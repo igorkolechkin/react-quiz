@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavToggler from '@components/Header/NavToggler';
 import NavList from '@components/Header/NavList';
+import Overlay from '@components/UI/Overlay';
 
 class Header extends Component {
   state = {
@@ -12,20 +13,27 @@ class Header extends Component {
     ]
   };
 
-  onClickHandler = () => {
+  onToggleMenuHandler = () => {
     this.setState({ menuOpen: !this.state.menuOpen })
   };
 
   render() {
+
+
     return (
       <header>
         <NavToggler
           isOpen={ this.state.menuOpen }
-          onClick={ this.onClickHandler } />
+          onToggleMenu={ this.onToggleMenuHandler } />
 
         <NavList
           isOpen={ this.state.menuOpen }
-          nav={ this.state.nav } />
+          nav={ this.state.nav }
+          onToggleMenu={ this.onToggleMenuHandler } />
+
+        <Overlay
+          isOpen={ this.state.menuOpen }
+          onToggleMenu={ this.onToggleMenuHandler } />
       </header>
     )
   }
