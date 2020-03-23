@@ -9,7 +9,9 @@ class Quizzes extends Component {
       <React.Fragment>
         <h2>Список тестов</h2>
 
-        <QuizList quizList={ this.quizList } />
+        <div className="card">
+          <QuizList quizList={ this.quizList } />
+        </div>
       </React.Fragment>
     )
   }

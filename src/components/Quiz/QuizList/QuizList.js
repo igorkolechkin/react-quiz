@@ -2,7 +2,7 @@ import React from 'react';
 import QuizListItem from '@components/Quiz/QuizListItem';
 
 const QuizList = props => (
-  <ul>
+  <ul className="list-style">
     {
       props.quizList.map((quiz, index) => {
         return (

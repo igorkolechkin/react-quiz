@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import FinishedList from '@components/Quiz/FinishedList';
 import Button from '@components/UI/Button';
 import styles from './FinishedQuiz.module.scss';
@@ -16,7 +17,9 @@ const FinishedQuiz = props => (
 
       <div className={ styles.buttons }>
         <Button onClick={ props.onRetry }>Повторить</Button>
-        <Button disabled >Перейти в список тестов</Button>
+        <NavLink to="/">
+          <Button>Перейти в список тестов</Button>
+        </NavLink>
       </div>
     </div>
   </React.Fragment>

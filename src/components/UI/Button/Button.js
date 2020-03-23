@@ -3,7 +3,7 @@ import styles from './Button.module.scss';
 
 const Button = props => {
   const classes = [styles.btn, styles[props.type]];
-console.log(props)
+
   return (
     <button
       className={ classes.join(' ') }
