@@ -1,0 +1,27 @@
+.wrapper {
+  margin-bottom: 15px;
+  position: relative;
+
+  span {
+    color: #f01f30;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    text-align: center;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+}
+
+.wrapper.error {
+  input {
+    border-color: #f01f30
+  }
+
+  span {
+    opacity: 1;
+  }
+}

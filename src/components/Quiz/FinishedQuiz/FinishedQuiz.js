@@ -1,8 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import FinishedList from '@components/Quiz/FinishedList';
 import Button from '@components/UI/Button';
-import styles from './FinishedQuiz.module.scss';
 
 const FinishedQuiz = props => (
   <React.Fragment>
@@ -15,11 +14,11 @@ const FinishedQuiz = props => (
 
       <p>Правильно { props.resultState.total } из { props.quiz.length }</p>
 
-      <div className={ styles.buttons }>
+      <div className="buttons-wrapper">
         <Button onClick={ props.onRetry }>Повторить</Button>
-        <NavLink to="/">
+        <Link to="/">
           <Button>Перейти в список тестов</Button>
-        </NavLink>
+        </Link>
       </div>
     </div>
   </React.Fragment>
