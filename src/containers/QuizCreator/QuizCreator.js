@@ -1,15 +1,18 @@
 import React, {Component} from 'react';
-import Input from '@components/UI/Input';
-import Select from '@components/UI/Select';
-import Button from '@components/UI/Button';
+import axios from 'axios';
+import QuizHeaderForm from '@components/Forms/QuizHeaderForm';
+import QuizMainForm from '@components/Forms/QuizMainForm';
 import { changeInput } from '@helpers/FormValid';
 
 class QuizCreator extends Component {
   state = {
-    formValid: false,
+    headerControls: false,
+    mainFormValid: false,
+    headerFormValid: false,
     rightAnswer: 'answer1',
     quizzes: [],
-    formControls: this.createFormControls()
+    formControls: this.createFormControls(),
+    headerFormControls: this.createHeaderFormControls()
   };
 
   submitHandler(e) {
@@ -81,14 +84,65 @@ class QuizCreator extends Component {
     }
   }
 
-  onInputChangeHandler = (value, controlName) => {
-    let controls = {...this.state.formControls};
-    const {formControls, formValid} = changeInput(controls, controlName, value);
+  createHeaderFormControls() {
+    return {
+      quizzesTitle: {
+        value: '',
+        type: 'text',
+        label: 'Заголовок теста',
+        id: 'quizzesTitle',
+        errorMessage: 'Введите заголовок теста',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true
+        }
+      },
+      quizzesDescription: {
+        value: '',
+        type: 'text',
+        label: 'Описание теста',
+        id: 'quizzesDescription',
+        errorMessage: 'Введите описание теста',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true,
+          minLength: 20
+        }
+      },
+      quizzesIcon: {
+        value: '',
+        type: 'text',
+        label: 'Иконка теста',
+        id: 'quizzesIcon',
+        errorMessage: 'Вставьте иконку теста',
+        valid: false,
+        touched: false,
+        validation: {
+          required: true
+        }
+      },
+    }
+  }
 
-    this.setState({ formControls, formValid })
+  onMainInputChangeHandler = (value, controlName) => {
+    let controls = {...this.state.formControls};
+    const {formControls, formValid: mainFormValid} = changeInput(controls, controlName, value);
+
+    this.setState({ formControls, mainFormValid })
   };
 
-  onChangeSelectHandler = value => this.setState({ rightAnswer: value });
+  onHeaderInputChangeHandler = (value, controlName) => {
+    let controls = {...this.state.headerFormControls};
+    const {formControls: headerFormControls, formValid: headerFormValid} = changeInput(controls, controlName, value);
+
+    this.setState({ headerFormControls, headerFormValid })
+  };
+
+  showMainFormHandler = () => this.setState({ headerControls: true });
+
+  onSelectChangeHandler = value => this.setState({ rightAnswer: value });
 
   addQuestionsHandler = () => {
     let quizzes = [...this.state.quizzes];
@@ -116,71 +170,58 @@ class QuizCreator extends Component {
     });
   };
 
-  createQuizHandler = () => {
-    console.log(this.state.quizzes)
+  createQuizHandler = async () => {
+    const { quizzesTitle, quizzesDescription, quizzesIcon } = this.state.headerFormControls;
+
+    const body = {
+      quizzesTitle: quizzesTitle.value,
+      quizzesDescription: quizzesDescription.value,
+      quizzesIcon: quizzesIcon.value,
+      quizzes: this.state.quizzes
+    };
+
+    try {
+      axios.post('https://quiz-508af.firebaseio.com/quizzes.json', body);
+
+      this.setState(state => ({
+        headerControls: false,
+        headerFormValid: false,
+        quizzes: [],
+        headerFormControls: this.createHeaderFormControls()
+      }))
+    } catch (error) {
+      console.log(error)
+    }
+    // TODO: processing error to component
   };
-
-  renderFormControls() {
-    return Object.keys(this.state.formControls).map((controlName, index) => {
-      const control = this.state.formControls[controlName];
-
-      return (
-        <Input
-          key={ index }
-          value={ control.value }
-          type={ control.type || 'text' }
-          id={ control.id }
-          label={ control.label }
-          errorMessage={ control.errorMessage }
-          valid={ control.valid }
-          touched={ control.touched }
-          onChange={ e => this.onInputChangeHandler(e.target.value, controlName) }
-        />
-      )
-    })
-  }
-
-  renderFormSelect() {
-    return (
-      <Select
-        label="Выберите правельный ответ"
-        options={[
-          {value: 'answer1', text: 'Ответ №1'},
-          {value: 'answer2', text: 'Ответ №2'},
-          {value: 'answer3', text: 'Ответ №3'},
-          {value: 'answer4', text: 'Ответ №4'}
-        ]}
-        value={ this.state.rightAnswer }
-        onChange={ e => this.onChangeSelectHandler(e.target.value) }
-      />
-    )
-  }
 
   render() {
     return (
       <React.Fragment>
         <h2>Создать тест</h2>
 
-        <form onSubmit={ this.submitHandler }>
-          { this.renderFormControls() }
-          { this.renderFormSelect() }
+        {
+          !this.state.headerControls
+            ? <QuizHeaderForm
+              onSubmit={ this.submitHandler }
+              formControls={ this.state.headerFormControls }
+              onInputChange={ this.onHeaderInputChangeHandler }
+              formValid={ this.state.headerFormValid }
+              showMainFormHandler={ this.showMainFormHandler }
+            />
+            : <QuizMainForm
+              onSubmit={ this.submitHandler }
+              formControls={ this.state.formControls }
+              rightAnswer={ this.state.rightAnswer }
+              onInputChange={ this.onMainInputChangeHandler }
+              onSelectChange={ this.onSelectChangeHandler }
+              formValid={ this.state.mainFormValid }
+              quizzesLength={ this.state.quizzes.length }
+              addQuestionsHandler={ this.addQuestionsHandler }
+              createQuizHandler={ this.createQuizHandler }
+            />
+        }
 
-          <div className="buttons-wrapper">
-            <Button
-              disabled={ !this.state.formValid }
-              onClick={ this.addQuestionsHandler }
-            >
-              Добавить вопрос
-            </Button>
-
-            <Button
-              disabled={ this.state.quizzes.length === 0 }
-              onClick={ this.createQuizHandler }
-            >
-              Создать тест
-            </Button>
-          </div>
-        </form>
       </React.Fragment>
     )
   }
