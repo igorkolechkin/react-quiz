@@ -8,8 +8,7 @@ const QuizListItem = props => (
     <NavLink
       to={{
         pathname: `/quiz/${props.quiz.id + 1}`,
-        search: `?link=${props.quiz.name}`,
-        //`/quiz/${props.quiz.name}`
+        state: props.quiz.name
       }}
     >
       <h3>{ props.quiz.title }</h3>

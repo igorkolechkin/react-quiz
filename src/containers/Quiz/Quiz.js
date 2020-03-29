@@ -75,10 +75,8 @@ class Quiz extends Component {
 
   async componentDidMount() {
     try {
-      const link = this.props.location.search.split('=')[1];
+      const link = this.props.location.state;
       const response = await axios.get(`quizzes/${link}.json`);
-
-      this.props.history.push(`/quiz/${this.props.match.params.id}`);
 
       this.setState(state => ({
         quiz: response.data.quizzes,

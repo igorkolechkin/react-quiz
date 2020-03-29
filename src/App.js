@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Header from '@containers/Header';
 import Auth from '@containers/Auth';
 import Quizzes from '@containers/Quizzes';
@@ -18,7 +18,8 @@ class App extends Component {
             <Route path="/auth" component={Auth} />
             <Route path="/quiz-creator" component={QuizCreator} />
             <Route path="/quiz/:id" component={Quiz} />
-            <Route path="/" component={Quizzes} />
+            <Redirect from='/quiz' to='/' />
+            <Route exact path="/" component={Quizzes} />
           </Switch>
         </main>
       </BrowserRouter>
