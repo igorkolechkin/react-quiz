@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Input from '@components/UI/Input';
 import Button from '@components/UI/Button';
 import { changeInput } from '@helpers/FormValid'
@@ -48,12 +49,27 @@ class Auth extends Component {
     this.setState({ formControls, formValid })
   };
 
-  loginHandler = () => {
+  getAuth(link) {
+    try {
+      const url = `${link}?key=AIzaSyDGi9hvLDiMy-_UaOAqqqGuGhBvL_9i6-A`;
+      const params = {
+        email: this.state.formControls.email.value,
+        password: this.state.formControls.password.value,
+        returnSecureToken: true
+      };
 
+      return axios.post(url, params);
+    } catch (error) {
+      return error
+    }
+  }
+
+  loginHandler = async () => {
+    await this.getAuth('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword');
   };
 
-  registerHandler = () => {
-
+  registerHandler = async () => {
+    await this.getAuth('https://identitytoolkit.googleapis.com/v1/accounts:signUp');
   };
 
   renderInputs() {

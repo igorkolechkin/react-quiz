@@ -1,22 +1,35 @@
 import React, { Component } from 'react';
+import Loader from '@components/UI/Loader';
 import QuizListItem from '@components/Quiz/QuizListItem';
-import axios from 'axios';
+import axios from '@helpers/Axios';
 
 class Quizzes extends Component {
   state = {
-    quizzes: []
+    quizzes: [],
+    loader: true
   };
 
   async componentDidMount() {
     try {
-      const response = await axios.get(`https://quiz-508af.firebaseio.com/quizzes.json`);
-      //let quizzes = [];
+      const response = await axios.get(`quizzes.json`);
+      let quizzes = [];
 
-      Object.keys(response.data).forEach((quiz, index) => {
-        console.log(quiz)
-      })
+      Object.keys(response.data).forEach((quizName, index) => {
+        quizzes.push({
+          id: index,
+          name: quizName,
+          title: response.data[quizName].quizzesTitle,
+          description: response.data[quizName].quizzesDescription,
+          icon: response.data[quizName].quizzesIcon
+        });
+      });
+
+      this.setState(state => ({
+        quizzes,
+        loader: false
+      }))
     } catch (error) {
-
+      console.log(error)
     }
   }
 
@@ -29,9 +42,13 @@ class Quizzes extends Component {
       <React.Fragment>
         <h2>Список тестов</h2>
 
-        <ul className="list-style card">
-          { this.renderQuizzes() }
-        </ul>
+        {
+          this.state.loader
+            ? <Loader />
+            : <ul className="list-style card">
+                { this.renderQuizzes() }
+              </ul>
+        }
       </React.Fragment>
     )
   }

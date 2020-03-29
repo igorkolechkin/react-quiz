@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+import axios from '@helpers/Axios';
 import QuizHeaderForm from '@components/Forms/QuizHeaderForm';
 import QuizMainForm from '@components/Forms/QuizMainForm';
 import { changeInput } from '@helpers/FormValid';
@@ -181,7 +181,7 @@ class QuizCreator extends Component {
     };
 
     try {
-      axios.post('https://quiz-508af.firebaseio.com/quizzes.json', body);
+      axios.post('quizzes.json', body);
 
       this.setState(state => ({
         headerControls: false,
