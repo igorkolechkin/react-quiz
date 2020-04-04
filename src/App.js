@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Header from '@containers/Header';
 import Auth from '@containers/Auth';
 import Quizzes from '@containers/Quizzes';
 import Quiz from '@containers/Quiz';
 import QuizCreator from '@containers/QuizCreator';
 
-
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <React.Fragment>
         <Header />
 
         <main className="layout container">
@@ -22,7 +21,7 @@ class App extends Component {
             <Route exact path="/" component={Quizzes} />
           </Switch>
         </main>
-      </BrowserRouter>
+      </React.Fragment>
     )
   }
 }

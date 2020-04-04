@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from '@helpers/Axios';
+import axios from '@services/firebase';
 import ActiveQuiz from '@components/Quiz/ActiveQuiz';
 import FinishedQuiz from '@components/Quiz/FinishedQuiz';
 import Loader from '@components/UI/Loader';

@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import axios from '@helpers/Axios';
+import axios from '@services/firebase';
 import QuizHeaderForm from '@components/Forms/QuizHeaderForm';
 import QuizMainForm from '@components/Forms/QuizMainForm';
-import { changeInput } from '@helpers/FormValid';
+import { changeInput } from '@services/validation';
 
 class QuizCreator extends Component {
   state = {

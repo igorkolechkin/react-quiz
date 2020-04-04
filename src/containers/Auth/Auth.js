@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Input from '@components/UI/Input';
 import Button from '@components/UI/Button';
-import { changeInput } from '@helpers/FormValid'
+import { changeInput } from '@services/validation'
 
 import styles from './Auth.module.scss';
 

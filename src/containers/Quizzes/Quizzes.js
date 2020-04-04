@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Loader from '@components/UI/Loader';
 import QuizListItem from '@components/Quiz/QuizListItem';
-import axios from '@helpers/Axios';
+import axios from '@services/firebase';
 
 class Quizzes extends Component {
   state = {
