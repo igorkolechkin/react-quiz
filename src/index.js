@@ -12,12 +12,17 @@ import './index.scss';
 const composeEnhancers =
   typeof window === 'object' &&
   window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-      // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
-    }) : compose;
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
+
+const store = createStore(
+  rootReducer,
+  composeEnhancers(
+    applyMiddleware(reduxThunk)
+  )
+);
 
 const app = (
-  <Provider store={ createStore(rootReducer, composeEnhancers(applyMiddleware(reduxThunk))) }>
+  <Provider store={ store }>
     <BrowserRouter>
       <App />
     </BrowserRouter>
